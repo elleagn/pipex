@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:39:10 by gozon             #+#    #+#             */
-/*   Updated: 2024/05/27 11:16:23 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/08 09:09:44 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,10 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+// Functions added later in cursus
+
+char	*get_next_line(int fd);
+int		ft_printf(const char *s, ...);
 
 #endif
