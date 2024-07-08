@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/08 12:05:26 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/08 13:09:28 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@ int	check_access(const char *path, int perm)
 		ft_printf("%s : %s", path, strerror(errno));
 	return (access_res);
 }
+// TODO : create fill_list to shorten function
 
-char	*ftostr(char *path)
+char	*ftolist(char *path)
 {
-	char	*str;
+	t_list	*list;
+	char	*buffer;
+	int		read_val;
 	int		fd;
 
 	fd = open(path, O_RDONLY);
@@ -38,6 +41,17 @@ char	*ftostr(char *path)
 	{
 		ft_printf("%s : %s", path, strerror(errno));
 		return (NULL);
+	}
+	read_val = -2;
+	while (read_val)
+	{
+		buffer = malloc(10 * sizeof(char));
+		if (!buffer)
+		{
+			perror(NULL);
+			return (ft_lstclear(list, free), NULL);
+		}
+		read_val = read();
 	}
 }
 
