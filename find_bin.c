@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   find_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/09 16:08:37 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/09 16:56:56 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,28 @@ int	check_access(const char *path, int perm)
 	return (access_res);
 }
 
+char	*find_bin(char *cmd, char *path)
+{
+	char	**path_tab;
+	int		i;
+
+	if (is_path(cmd))
+	{
+		if (check_access(cmd, 1))
+			return (NULL);
+		return (cmd);
+	}
+	path_tab = ft_split(path, ':');
+	if (!path_tab)
+		return (perror(NULL), NULL);
+}
+
 // check_access
 
-int	main(int argc, char **argv)
-{
-	(void) argc;
-	check_access(argv[1], atoi(argv[2]));
-	return (0);
-}
+// int	main(int argc, char **argv)
+// {
+// 	(void) argc;
+// 	check_access(argv[1], atoi(argv[2]));
+// 	return (0);
+// }
+
