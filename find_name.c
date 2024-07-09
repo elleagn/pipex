@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/08 13:48:37 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/09 16:08:37 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_access(const char *path, int perm)
 	if (!access_res && (perm == 3 || perm == 4 || perm == 6 || perm == 7))
 		access_res = access(path, R_OK);
 	if (access_res)
-		ft_printf("%s : %s\n", path, strerror(errno));
+		ft_printf("%s: %s\n", path, strerror(errno));
 	return (access_res);
 }
 

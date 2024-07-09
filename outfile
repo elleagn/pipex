@@ -1,0 +1,8 @@
+total 48
+-rwxr-xr-x 1 gozon 2024_paris 21680 Jul  9 15:56 a.out
+-rw-r--r-- 1 gozon 2024_paris  2833 Jul  9 15:57 file_to_string.c
+-rw-r--r-- 1 gozon 2024_paris    15 Jul  9 15:57 input
+drwxr-xr-x 2 gozon 2024_paris  4096 Jul  8 09:10 Libft
+-rw-r--r-- 1 gozon 2024_paris     0 Jul  9 16:07 outfile
+-rw-r--r-- 1 gozon 2024_paris  1508 Jul  8 13:48 pipex.c
+-rw-r--r-- 1 gozon 2024_paris  1062 Jul  8 13:06 pipex.h
