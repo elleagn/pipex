@@ -1,0 +1,19 @@
+- Retrieve path variable and split it into a char **
+- Check if infile exists and is readable
+- Check if outfile exists (if not, create it, if yes, check if it is writeable)
+- Check if cmd1 and cmd2 are executable
+- Making a backup of stdout
+- Opening a pipe
+- Forking my process
+
+|			Parent process				|			Child process			|
+|										|									|
+| - Closing reading end of the pipe		| - Closing the writing end of the	|
+| - Storing infile in a string			|	pipe							|
+| - Replacing stdout by the writing end	| - Storing reading end in string	|
+|	of the pipe							| - Closing reading end of pipe		|
+| - Executing my command				| - Replacing stdout with outfile	|
+| - Closing the writing end of the pipe	| - Executing my command			|
+| - Free my string						| - Free my string					|
+
+

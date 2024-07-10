@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/10 08:53:57 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/10 09:00:22 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*find_bin(char *cmd, char **path_tab)
 	{
 		path = ft_strjoin_three(path_tab[i], "/", cmd);
 		if (!path)
-			return (perror(NULL), NULL);
+			return (NULL);
 		if (!access(path, X_OK))
 			return (path);
 		free(path);
