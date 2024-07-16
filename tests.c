@@ -6,7 +6,17 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 08:31:47 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/16 08:32:08 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/16 08:58:24 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "pipex.h"
+
+int	main(void)
+{
+	char	*args[] = {"/usr/bin/cat", "-d", NULL};
+
+	execve(args[0], args, NULL);
+	ft_printf("hello");
+	return (0);
+}

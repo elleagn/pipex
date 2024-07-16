@@ -6,26 +6,23 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/16 08:36:55 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/16 09:22:19 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	check_access(const char *path, int perm)
+void	free_char_tab(char **tab)
 {
-	int	access_res;
+	int	i;
 
-	access_res = 0;
-	if (perm == 1 || perm == 3 || perm == 5 || perm == 7)
-		access_res = access(path, X_OK);
-	if (!access_res && (perm == 2 || perm == 3 || perm == 6 || perm == 7))
-		access_res = access(path, W_OK);
-	if (!access_res && (perm == 3 || perm == 4 || perm == 6 || perm == 7))
-		access_res = access(path, R_OK);
-	if (access_res)
-		ft_printf("%s: %s\n", path, strerror(errno));
-	return (access_res);
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }
 
 char	*ft_strjoin_three(char const *s1, char const *s2, char const *s3)
@@ -54,8 +51,8 @@ char	*find_bin(char *cmd, char **path_tab)
 
 	if (ft_strnstr(cmd, "/", ft_strlen(cmd)))
 	{
-		if (check_access(cmd, 1))
-			return (NULL);
+		if (access(cmd, X_OK))
+			return (perror(cmd), NULL);
 		return (cmd);
 	}
 	i = 0;
@@ -69,7 +66,7 @@ char	*find_bin(char *cmd, char **path_tab)
 		free(path);
 		i++;
 	}
-	ft_printf("command not found: %s", cmd);
+	ft_printf("%s: command not found", cmd);
 	return (NULL);
 }
 
@@ -81,18 +78,13 @@ char	**get_args(char *arg, char **path)
 	args = ft_split(arg, ' ');
 	if (!args)
 		return (perror("split"), NULL);
-	cmd = find_bin(arg[0], path);
-	if 
+	cmd = find_bin(args[0], path);
+	if (!cmd)
+		return (free_char_tab(args), NULL);
+	free(args[0]);
+	args[0] = cmd;
+	return (args);
 }
-
-// check_access
-
-// int	main(int argc, char **argv)
-// {
-// 	(void) argc;
-// 	check_access(argv[1], atoi(argv[2]));
-// 	return (0);
-// }
 
 // find_bin
 
@@ -112,5 +104,43 @@ char	**get_args(char *arg, char **path)
 // 		if (str)
 // 			ft_printf("%s", str);
 // 	}
+// 	return (0);
+// }
+
+// get_args
+
+// void	ft_printtab(char **tab)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (tab[i])
+// 	{
+// 		ft_printf("%s\n", tab[i]);
+// 		i++;
+// 	}
+// }
+
+// int	main(int ac, char **av)
+// {
+// 	char	**path_tab;
+// 	char	**args;
+
+// 	path_tab = ft_split("/home/gozon/bin:/home/gozon/bin:/usr/local/sbin:"
+// 			"/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:"
+// 			"/usr/local/games:/snap/bin", ':');
+// 	if (!path_tab)
+// 		return (perror(NULL), 1);
+// 	if (ac == 2)
+// 	{
+// 		args = get_args(av[1], path_tab);
+// 		if (args)
+// 		{
+// 			ft_printtab(args);
+// 			free_char_tab(args);
+// 		}
+// 	}
+// 	free_char_tab(path_tab);
+
 // 	return (0);
 // }
