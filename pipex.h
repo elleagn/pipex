@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:51:43 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/16 09:22:37 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/16 10:32:29 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@
 
 int		**create_pipes(int size);
 char	**get_args(char *arg, char **path);
+void	close_pipes(int **pipes);
+void	free_int_tab(int **tab);
 
 #endif
