@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/10 09:00:22 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/16 08:36:55 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,18 @@ char	*find_bin(char *cmd, char **path_tab)
 	}
 	ft_printf("command not found: %s", cmd);
 	return (NULL);
+}
+
+char	**get_args(char *arg, char **path)
+{
+	char	**args;
+	char	*cmd;
+
+	args = ft_split(arg, ' ');
+	if (!args)
+		return (perror("split"), NULL);
+	cmd = find_bin(arg[0], path);
+	if 
 }
 
 // check_access
