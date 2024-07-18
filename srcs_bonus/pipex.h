@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: elleagn <elleagn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 08:31:47 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/16 08:58:24 by gozon            ###   ########.fr       */
+/*   Created: 2024/07/18 14:54:53 by elleagn           #+#    #+#             */
+/*   Updated: 2024/07/18 16:55:39 by elleagn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#ifndef PIPEX_H
+# define PIPEX_H
 
-int	main(void)
+typedef struct s_process
 {
-	char	*args[] = {"/usr/bin/cat", "-d", NULL};
+	int		infile;
+	int		outfile;
+	char	**args;
+	int		error_number;
+	int		error_message;
+}				t_process;
 
-	execve(args[0], args, NULL);
-	ft_printf("hello");
-	return (0);
-}
+#endif
