@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elleagn <elleagn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/18 16:58:59 by elleagn           #+#    #+#             */
-/*   Updated: 2024/07/18 17:39:59 by elleagn          ###   ########.fr       */
+/*   Created: 2024/07/18 17:05:48 by elleagn           #+#    #+#             */
+/*   Updated: 2024/07/18 17:51:33 by elleagn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
 
-# include "../Libft/libft.h"
-# include <stdio.h>
-# include <errno.h>
-
-typedef struct s_process
+int	main(int ac, char **av, char **envp)
 {
-	int		infile;
-	int		outfile;
-	char	**args;
-	int		error_number;
-	int		error_message;
-}				t_process;
+	t_process	*parent;
+	t_process	*child;
 
-#endif
+	if (ac != 4)
+	{
+		ft_printf("wrong number of arguments");
+		return (1);
+	}
+	parent = malloc(sizeof(t_process));
+	if (!parent)
+		return (perror("malloc"), 1);
+	child = malloc(sizeof(t_process));
+	if (!child)
+		return (perror("malloc"), free(parent), 1);
+	return (pipex(parent, child, av, envp));
+}
