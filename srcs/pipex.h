@@ -6,7 +6,7 @@
 /*   By: elleagn <elleagn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:58:59 by elleagn           #+#    #+#             */
-/*   Updated: 2024/07/18 17:39:59 by elleagn          ###   ########.fr       */
+/*   Updated: 2024/07/18 18:14:19 by elleagn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../Libft/libft.h"
 # include <stdio.h>
 # include <errno.h>
+# include <sys/types.h>
 
 typedef struct s_process
 {
@@ -25,5 +26,7 @@ typedef struct s_process
 	int		error_number;
 	int		error_message;
 }				t_process;
+
+int	pipex(t_process *parent, t_process *child, char **av, char **envp);
 
 #endif
