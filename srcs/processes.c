@@ -6,11 +6,11 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 08:32:23 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/19 11:01:55 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/19 14:08:10 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 t_process	*init_process(void)
 {
@@ -22,7 +22,6 @@ t_process	*init_process(void)
 	process->in = -1;
 	process->out = -1;
 	process->args = NULL;
-	process->error_msg = NULL;
 	process->error_nb = 0;
 	process->pid = -1;
 	return (process);

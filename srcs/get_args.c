@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/19 11:04:46 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/19 15:02:58 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,46 +44,40 @@ char	*ft_strjoin_three(char const *s1, char const *s2, char const *s3)
 	return (res);
 }
 
-char	*find_bin(char *cmd, char **path_tab)
+int	*find_bin(char **cmd, char **path)
 {
-	char	*path;
+	char	*bin;
 	int		i;
 
-	if (ft_strnstr(cmd, "/", ft_strlen(cmd)))
+	if (ft_strnstr(*cmd, "/", ft_strlen(*cmd)))
 	{
-		if (access(cmd, X_OK))
-			return (perror(cmd), NULL);
-		return (cmd);
+		if (access(*cmd, X_OK))
+			return (perror(*cmd), 127);
+		return (0);
 	}
 	i = 0;
-	while (path_tab[i])
+	while (path[i])
 	{
-		path = ft_strjoin_three(path_tab[i], "/", cmd);
-		if (!path)
-			return (NULL);
-		if (!access(path, X_OK))
-			return (path);
-		free(path);
+		bin = ft_strjoin_three(path[i], "/", *cmd);
+		if (!bin)
+			return (perror("malloc"), -1);
+		if (!access(bin, X_OK))
+			return (replace(cmd, bin), 0);
+		free(bin);
 		i++;
 	}
-	ft_printf("%s: command not found %d", cmd, errno);
-	return (NULL);
+	ft_printf("%s: command not found", cmd);
+	return (127);
 }
 
-char	**get_args(t_process *process, char *cmd, char **path)
+int	get_args(t_process *process, char *cmd, char **path)
 {
-	char	**args;
-	char	*cmd;
-
-	args = ft_split(arg, ' ');
-	if (!args !args[0])
-		return (perror("split"), NULL);
-	cmd = find_bin(args[0], path);
-	if (!cmd)
-		return (free_char_tab(args), NULL);
-	free(args[0]);
-	args[0] = cmd;
-	return (args);
+	process->args = ft_split(cmd, ' ');
+	if (!process->args)
+		return (perror("split"), -1);
+	if (!process->args[0])
+		return (ft_printf("%s: command not found", cmd), 127);
+	return (find_bin(process, path));
 }
 
 // find_bin

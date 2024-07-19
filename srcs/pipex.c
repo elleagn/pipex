@@ -6,11 +6,11 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 09:31:26 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/19 10:17:30 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/19 11:17:30 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 char	*get_path_str(char **envp)
 {

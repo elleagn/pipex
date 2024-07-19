@@ -6,11 +6,11 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 09:16:59 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/19 09:31:07 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/19 11:09:51 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 int	main(int ac, char **av, char **envp)
 {
