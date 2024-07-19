@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 10:40:12 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/17 18:25:47 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/17 18:38:41 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	exec_cmds(t_cl_args *cl_args, char **path, int **pipes)
 	while (i < cl_args->cmd_nb)
 	{
 		args = get_args(cl_args->av[i + 2], path);
-		if (!args || args[0] == NULL)
+		if (!args)
 			break ;
 		pid = fork();
 		if (pid == 0)

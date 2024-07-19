@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   main_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 10:02:12 by gozon             #+#    #+#             */
-/*   Updated: 2024/05/22 10:21:02 by gozon            ###   ########.fr       */
+/*   Created: 2024/07/17 18:29:52 by gozon             #+#    #+#             */
+/*   Updated: 2024/07/17 18:37:32 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "Libft/libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+void	ft_printtab(char **tab)
 {
-	char	*trimmed;
-	size_t	start;
-	size_t	end;
+	int	i;
 
-	start = 0;
-	end = ft_strlen(s1) - 1;
-	while (s1[start] && ft_strchr(set, s1[start]))
-		start++;
-	while (start - end >= 0 && ft_strchr(set, s1[end]))
-		end --;
-	trimmed = ft_substr(s1, start, end - start + 1);
-	return (trimmed);
+	i = 0;
+	while (tab[i])
+	{
+		ft_printf("%s\n", tab[i]);
+		i++;
+	}
+	ft_printf("%s\n", tab[i]);
+}
+
+int	main(int ac, char **av)
+{
+	char	**splitted;
+
+	if (ac != 3)
+	{
+		ft_printf("wrong number of arguments");
+		return (1);
+	}
+	splitted = ft_split(av[1], av[2][0]);
+	if (!splitted)
+		return (1);
+	ft_printtab(splitted);
+	return (0);
 }
