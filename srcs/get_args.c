@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/17 18:45:02 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/19 11:04:46 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ char	*find_bin(char *cmd, char **path_tab)
 		if (!path)
 			return (NULL);
 		if (!access(path, X_OK))
-		{
-			errno = 0;
 			return (path);
-		}
 		free(path);
 		i++;
 	}
@@ -73,13 +70,13 @@ char	*find_bin(char *cmd, char **path_tab)
 	return (NULL);
 }
 
-char	**get_args(char *arg, char **path)
+char	**get_args(t_process *process, char *cmd, char **path)
 {
 	char	**args;
 	char	*cmd;
 
 	args = ft_split(arg, ' ');
-	if (!args || !args[0])
+	if (!args !args[0])
 		return (perror("split"), NULL);
 	cmd = find_bin(args[0], path);
 	if (!cmd)

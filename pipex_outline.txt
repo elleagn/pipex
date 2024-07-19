@@ -64,3 +64,37 @@ endfor
 while wait(NULL) > 0 do
 	continue;
 endwhile
+
+
+pipex funct
+
+path
+
+path = get_path
+if !path
+	return
+pipes = create_pipes
+if (!pipes)
+	return
+lst = setup_proclist
+if !lst
+	return
+execprocs
+close_pipes
+free path
+wait
+	print err_msg
+return last_err
+
+setup_proc
+
+proc
+
+proc = init_proc
+if !proc
+	return
+proc->args = get_args
+	if (!args || error_nb)
+		return
+proc->in = pipes[i-1][0]
+proc->out = pipes[i][1]

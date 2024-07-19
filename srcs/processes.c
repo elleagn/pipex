@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 08:32:23 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/19 09:09:11 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/19 11:01:55 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_process	*init_process(void)
 	process = malloc(sizeof(t_process));
 	if (!process)
 		return (perror("init_process"), NULL);
-	process->in = 0;
-	process->out = 0;
+	process->in = -1;
+	process->out = -1;
 	process->args = NULL;
 	process->error_msg = NULL;
 	process->error_nb = 0;
@@ -33,4 +33,16 @@ void	destroy_process(t_process *process)
 	free(process->args);
 	free(process->args);
 	free(process);
+}
+
+t_process	*setup_process(char *cmd, char **path, int in, int out)
+{
+	t_process	*process;
+
+	process = init_process();
+	if (!process)
+		return (NULL);
+	process->args = get_args(process, cmd, path);
+	if (!process->args)
+		return (NULL);
 }
