@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Gaelle <Gaelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 08:21:34 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/19 14:07:59 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/28 17:08:10 by Gaelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "../Libft/libft.h"
+# include "Libft/libft.h"
 # include <string.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -29,8 +29,10 @@ typedef struct s_process
 	pid_t	pid;
 }				t_process;
 
-int		pipex(t_list *proclist, char **av, char **envp);
-int		**create_pipes(int size);
-void	close_pipes(int **pipes);
+int			pipex(t_list *proclist, char **av, char **envp);
+int			**create_pipes(int size);
+void		close_pipes(int **pipes);
+t_process	*init_process(void);
+void		destroy_process(t_process *process);
 
 #endif

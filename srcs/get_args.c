@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Gaelle <Gaelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/19 15:02:58 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/28 17:10:41 by Gaelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 void	free_char_tab(char **tab)
 {
@@ -23,6 +23,12 @@ void	free_char_tab(char **tab)
 		i++;
 	}
 	free(tab);
+}
+
+void	replace(char **str1, char *str2)
+{
+	free(*str1);
+	*str1 = str2;
 }
 
 char	*ft_strjoin_three(char const *s1, char const *s2, char const *s3)
@@ -44,7 +50,7 @@ char	*ft_strjoin_three(char const *s1, char const *s2, char const *s3)
 	return (res);
 }
 
-int	*find_bin(char **cmd, char **path)
+int	find_bin(char **cmd, char **path)
 {
 	char	*bin;
 	int		i;
@@ -66,7 +72,7 @@ int	*find_bin(char **cmd, char **path)
 		free(bin);
 		i++;
 	}
-	ft_printf("%s: command not found", cmd);
+	ft_printf("%s: command not found", *cmd);
 	return (127);
 }
 
@@ -77,7 +83,7 @@ int	get_args(t_process *process, char *cmd, char **path)
 		return (perror("split"), -1);
 	if (!process->args[0])
 		return (ft_printf("%s: command not found", cmd), 127);
-	return (find_bin(process, path));
+	return (find_bin(&(process->args[0]), path));
 }
 
 // find_bin
@@ -117,8 +123,8 @@ int	get_args(t_process *process, char *cmd, char **path)
 
 // int	main(int ac, char **av)
 // {
-// 	char	**path_tab;
-// 	char	**args;
+// 	char		**path_tab;
+// 	t_process	*process;
 
 // 	path_tab = ft_split("/home/gozon/bin:/home/gozon/bin:/usr/local/sbin:"
 // 			"/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:"
@@ -127,14 +133,15 @@ int	get_args(t_process *process, char *cmd, char **path)
 // 		return (perror(NULL), 1);
 // 	if (ac == 2)
 // 	{
-// 		args = get_args(av[1], path_tab);
-// 		if (args)
+// 		process = init_process();
+// 		if (process)
 // 		{
-// 			ft_printtab(args);
-// 			free_char_tab(args);
+// 			process->error_nb = get_args(process, av[1], path_tab);
+// 			if (!process->error_nb)
+// 				ft_printtab(process->args);
+// 			destroy_process(process);
 // 		}
 // 	}
 // 	free_char_tab(path_tab);
-
 // 	return (0);
 // }
