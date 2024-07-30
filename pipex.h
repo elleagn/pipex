@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gaelle <Gaelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 08:21:34 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/28 17:08:10 by Gaelle           ###   ########.fr       */
+/*   Updated: 2024/07/30 21:27:17 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,21 @@
 
 typedef struct s_process
 {
-	int		in;
-	int		out;
-	char	**args;
-	int		error_nb;
+	int		fd[2];
+	char	**cmd;
+	int		errnb;
+	int		pos;
 	pid_t	pid;
 }				t_process;
 
-int			pipex(t_list *proclist, char **av, char **envp);
+typedef struct s_args
+{
+	int		ncmd;
+	char	**argv;
+	char	**envp;
+	char	**path;
+}				t_args;
+
 int			**create_pipes(int size);
 void		close_pipes(int **pipes);
 t_process	*init_process(void);
