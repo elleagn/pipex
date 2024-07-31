@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 10:02:12 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/31 11:37:34 by gozon            ###   ########.fr       */
+/*   Created: 2024/07/31 10:38:21 by gozon             #+#    #+#             */
+/*   Updated: 2024/07/31 11:08:20 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../pipex.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+t_process	*init_process(void)
 {
-	char	*trimmed;
-	size_t	start;
-	size_t	end;
+	t_process	*process;
 
-	start = 0;
-	end = ft_strlen(s1) - 1;
-	while (s1[start] && ft_strchr(set, s1[start]))
-		start++;
-	while (start <= end && ft_strchr(set, s1[end]))
-		end --;
-	trimmed = ft_substr(s1, start, end - start + 1);
-	return (trimmed);
+	process = malloc(sizeof(t_process));
+	if (!process)
+		return (perror("init_process"), NULL);
+	process->fd[0] = -1;
+	process->fd[1] = -1;
+	process->cmd = NULL;
+	process->errnb = 0;
+	process->pos = -1;
+	process->pid = -1;
+	return (process);
 }
