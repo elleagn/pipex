@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:45:03 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/31 11:43:01 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/31 13:05:45 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,21 @@ void	print_process(t_process *process)
 
 int	main(void)
 {
-	print_process(init_process());
+	t_process	**procarr;
+	int			i;
+
+	procarr = init_proc_array(5);
+	if (!procarr)
+		return (ft_printf("null array\n"), 1);
+	i = 0;
+	while (i < 5)
+	{
+		if (!procarr[i] || !procarr[i]->errnb == 0)
+			return (ft_printf("pb with process"), 1);
+		i++;
+	}
+	if (!procarr[i])
+		ft_printf("OK\n");
+	clear_proc_array(procarr);
 	return (0);
 }

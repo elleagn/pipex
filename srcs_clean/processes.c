@@ -6,11 +6,20 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:38:21 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/31 11:08:20 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/31 12:15:11 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+void	clear_process(t_process *process)
+{
+	if (process)
+	{
+		free(process->cmd);
+		free(process);
+	}
+}
 
 t_process	*init_process(void)
 {

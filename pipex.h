@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 08:21:34 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/30 21:27:17 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/31 13:05:21 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,16 @@ typedef struct s_args
 	char	**path;
 }				t_args;
 
+// pipes functions
+
 int			**create_pipes(int size);
 void		close_pipes(int **pipes);
+
+// t_process and array of t_process functions
+
 t_process	*init_process(void);
-void		destroy_process(t_process *process);
+void		clear_process(t_process *process);
+t_process	**init_proc_array(int size);
+void		clear_proc_array(t_process **proc_array);
 
 #endif
