@@ -6,11 +6,13 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 21:17:31 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/31 13:04:16 by gozon            ###   ########.fr       */
+/*   Updated: 2024/07/31 19:41:05 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+// Extract the PATH variable as a string from envp
 
 char	*get_path_str(char **envp)
 {
@@ -33,6 +35,8 @@ char	*get_path_str(char **envp)
 	return (NULL);
 }
 
+// Extracts the PATH variable as a char ** from envp
+
 char	**get_path(char **envp)
 {
 	char	**path_tab;
@@ -50,9 +54,11 @@ char	**get_path(char **envp)
 
 void	clear_args(t_args	*args)
 {
-	free(args->path);
+	free_charr(args->path);
 	free(args);
 }
+
+// Takes the command line args and puts them in my args struct
 
 t_args	*create_args(int argc, char **argv, char **envp)
 {

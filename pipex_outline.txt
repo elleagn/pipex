@@ -68,15 +68,8 @@ endwhile
 
 pipex funct
 
-path
-
-path = get_path
-if !path
-	return
-pipes = create_pipes
-if (!pipes)
-	return
-lst = setup_proclist
+if (setup_processes(procarr, args))
+	return (-1)
 if !lst
 	return
 execprocs

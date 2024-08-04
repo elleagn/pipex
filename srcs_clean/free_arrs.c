@@ -1,42 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_split.c                                       :+:      :+:    :+:   */
+/*   free_arrs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 18:29:52 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/17 18:37:32 by gozon            ###   ########.fr       */
+/*   Created: 2024/07/31 18:02:27 by gozon             #+#    #+#             */
+/*   Updated: 2024/07/31 18:05:22 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Libft/libft.h"
+#include "../pipex.h"
 
-void	ft_printtab(char **tab)
+void	free_strarr(char **array)
 {
 	int	i;
 
+	if (!array)
+		return ;
 	i = 0;
-	while (tab[i])
+	while (array[i])
 	{
-		ft_printf("%s\n", tab[i]);
-		i++;
+		free(array[i]);
 	}
-	ft_printf("%s\n", tab[i]);
-}
-
-int	main(int ac, char **av)
-{
-	char	**splitted;
-
-	if (ac != 3)
-	{
-		ft_printf("wrong number of arguments");
-		return (1);
-	}
-	splitted = ft_split(av[1], av[2][0]);
-	if (!splitted)
-		return (1);
-	ft_printtab(splitted);
-	return (0);
+	free(array);
 }

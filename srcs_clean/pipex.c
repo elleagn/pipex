@@ -1,47 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 13:24:58 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/19 14:02:33 by gozon            ###   ########.fr       */
+/*   Created: 2024/07/31 18:19:37 by gozon             #+#    #+#             */
+/*   Updated: 2024/07/31 19:11:44 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
-extern char	**environ;
-
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*args[] = {"/usr/bin/cat", "-d", NULL};
-
-// 	fd = open("infile", O_WRONLY);
-// 	dup2(fd, STDERR_FILENO);
-// 	execve(args[0], args, environ);
-// 	return (1);
-// }
-
-int	main(void)
+int	pipex(t_args *args, t_process **processes)
 {
-	int		i;
-	pid_t	pid;
+	int	i;
 
+	if (fill_files(processes, args))
+		return (-1);
+	if (fill_cmds(processes, args))
+		return (close_files(processes), -1);
 	i = 0;
-	while (i < 5)
+	while (i < args->ncmd)
 	{
-		pid = fork();
-		if (pid == 0)
+		processes[i]->pid = fork();
+		if (processes[i]->pid < -1)
 		{
-			perror(ft_itoa(i));
-			exit(EXIT_SUCCESS);
+			perror("fork");
+			processes[i]->errnb = -1;
+			break ;
 		}
-		i++;
+		if (!processes[i]->pid)
+			child_process(processes[i]);
 	}
+	i = 0;
+	close_files(processes);
 	while (wait(NULL) > 0)
 		continue ;
-	return (0);
+	return (processes[i]->errnb);
 }
