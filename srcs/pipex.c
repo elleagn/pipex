@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:19:37 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 18:29:56 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 21:49:54 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	pipex(t_args args, t_process **processes)
 			processes[i]->errnb = -1;
 			break ;
 		}
-		if (!pid)
-			child_process(processes, i);
+		if (!pid && !processes[i]->errnb)
+			child_process(processes, i, args.envp);
 		i++;
 	}
 	close_process_files(processes);

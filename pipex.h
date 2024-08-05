@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 08:21:34 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 16:16:18 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 21:46:10 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ void		close_process_files(t_process **processes);
 
 int			setup_process_pipes(t_process **processes, t_args args);
 int			setup_process_cmds(t_process **processes, t_args args);
+
+// Exec functions
+
+int			child_process(t_process **processes, int i, char **envp);
+int			pipex(t_args args, t_process **processes);
 
 // Test and printing functions
 
