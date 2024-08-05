@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 15:59:40 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 20:05:59 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,11 @@ int	initialize_process_cmd(t_process *process, char *cmd, char **path)
 // each process using the provided path and command line arguments.
 // The error status of the command for each process is stored in errnb.
 // Returns 0 on success and -1 if an allocation error occurs in any subfunction.
-int	setup_process_cmds(t_process	**processes, t_args args)
+int	setup_process_cmds(t_process **processes, t_args args)
 {
 	int	i;
 
+	i = 0;
 	while (i < args.ncmd)
 	{
 		if (!processes[i]->errnb)
@@ -104,9 +105,11 @@ int	setup_process_cmds(t_process	**processes, t_args args)
 			if (processes[i]->errnb == -1)
 				return (-1);
 		}
+		i++;
 	}
 	return (0);
 }
+
 // find_bin
 
 // int	main(int ac, char **av)

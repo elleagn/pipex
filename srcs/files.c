@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 19:01:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 15:58:17 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 16:34:06 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	setup_process_pipes(t_process **processes, t_args args)
 	pipes = create_pipes(args.ncmd - 1);
 	if (!pipes)
 		return (-1);
-	i = 1;
+	i = 0;
 	while (i < args.ncmd)
 	{
 		if (i > 0)
@@ -76,7 +76,7 @@ int	setup_process_pipes(t_process **processes, t_args args)
 	}
 	processes[0]->errnb = open_input_file(processes[0]->fd, args.argv[1]);
 	processes[i - 1]->errnb = open_output_file(processes[i - 1]->fd,
-			args.argv[i + 1]);
+			args.argv[i + 2]);
 	free_int_array(pipes);
 	return (0);
 }

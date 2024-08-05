@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 21:17:31 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/31 19:41:05 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 18:22:26 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	**get_path(char **envp)
 
 void	clear_args(t_args	*args)
 {
-	free_charr(args->path);
+	free_str_array(args->path);
 	free(args);
 }
 

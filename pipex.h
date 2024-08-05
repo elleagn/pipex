@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 08:21:34 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 11:20:57 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 16:16:18 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,16 @@ int			**create_pipes(int size);
 void		free_str_array(char **array);
 void		clear_proc_array(t_process **proc_array);
 void		clear_process(t_process *process);
-void		free_int_tab(int **tab);
+void		free_int_array(int **tab);
+void		close_process_files(t_process **processes);
 
 // processes filling functions
 
 int			setup_process_pipes(t_process **processes, t_args args);
+int			setup_process_cmds(t_process **processes, t_args args);
+
+// Test and printing functions
+
+void		print_process(t_process *process);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:38:21 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/31 18:17:54 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 18:20:32 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	clear_process(t_process *process)
 {
 	if (process)
 	{
-		free(process->cmd);
+		free_str_array(process->cmd);
 		free(process);
 	}
 }
@@ -32,8 +32,6 @@ t_process	*init_process(void)
 	process->fd[1] = -1;
 	process->cmd = NULL;
 	process->errnb = 0;
-	process->pos = -1;
-	process->pid = -1;
 	return (process);
 }
 
@@ -47,6 +45,7 @@ void	clear_proc_array(t_process **proc_array)
 		clear_process(proc_array[i]);
 		i++;
 	}
+	free(proc_array);
 }
 
 t_process	**init_proc_array(int size)

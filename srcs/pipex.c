@@ -6,36 +6,44 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:19:37 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 15:26:16 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 18:29:56 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	pipex(t_args *args, t_process **processes)
+int	min(int n1, int n2)
 {
-	int	i;
+	if (n1 < n2)
+		return (n1);
+	return (n2);
+}
+
+int	pipex(t_args args, t_process **processes)
+{
+	int		i;
+	pid_t	pid;
 
 	if (setup_process_pipes(processes, args))
 		return (-1);
 	if (setup_process_cmds(processes, args))
 		return (close_process_files(processes), -1);
 	i = 0;
-	while (i < args->ncmd)
+	while (i < args.ncmd)
 	{
-		processes[i]->pid = fork();
-		if (processes[i]->pid < -1)
+		pid = fork();
+		if (pid < -1)
 		{
 			perror("fork");
 			processes[i]->errnb = -1;
 			break ;
 		}
-		if (!processes[i]->pid)
-			child_process(processes[i]);
+		if (!pid)
+			child_process(processes, i);
+		i++;
 	}
-	i = 0;
 	close_process_files(processes);
 	while (wait(NULL) > 0)
 		continue ;
-	return (processes[i]->errnb);
+	return (processes[min(args.ncmd - 1, i)]->errnb);
 }
