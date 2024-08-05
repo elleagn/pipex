@@ -6,19 +6,24 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 10:08:09 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 15:59:40 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
+// Frees the string pointed to by str1, and replaces it with str2.
+// str2 replaces the new string and is not freed.
 void	replace(char **str1, char *str2)
 {
 	free(*str1);
 	*str1 = str2;
 }
 
-char	*ft_strjoin_three(char const *s1, char const *s2, char const *s3)
+// Joins 3 strings into a new created string.
+// Returns the new string on success or NULL on failure.
+// The caller is responsible for freeing the allocated memory.
+char	*strjoin_three(char const *s1, char const *s2, char const *s3)
 {
 	char	*res;
 	int		len1;
@@ -37,6 +42,11 @@ char	*ft_strjoin_three(char const *s1, char const *s2, char const *s3)
 	return (res);
 }
 
+// Finds an executable file with the name of the command in the specified
+// directories.
+// Updates cmd with the path of the found executable.
+// Returns -1 if there is an allocation error, 127 if the command is not found,
+// and 0 on success.
 int	find_bin(char **cmd, char **path)
 {
 	char	*bin;
@@ -51,7 +61,7 @@ int	find_bin(char **cmd, char **path)
 	i = 0;
 	while (path[i])
 	{
-		bin = ft_strjoin_three(path[i], "/", *cmd);
+		bin = strjoin_three(path[i], "/", *cmd);
 		if (!bin)
 			return (perror("malloc"), -1);
 		if (!access(bin, X_OK))
@@ -63,7 +73,11 @@ int	find_bin(char **cmd, char **path)
 	return (127);
 }
 
-int	get_cmd(t_process *process, char *cmd, char **path)
+// Parses a command string and stores it in the process command slot as a string
+// array.
+// Returns 0 on success, 127 if the command is not found, and -1 if an
+// allocation error occurs.
+int	initialize_process_cmd(t_process *process, char *cmd, char **path)
 {
 	process->cmd = ft_split(cmd, ' ');
 	if (!process->cmd)
@@ -73,16 +87,23 @@ int	get_cmd(t_process *process, char *cmd, char **path)
 	return (find_bin(&(process->cmd[0]), path));
 }
 
-int	fill_cmds(t_process	**processes, t_args args)
+// Iterates through a process array and sets up the command to be executed by
+// each process using the provided path and command line arguments.
+// The error status of the command for each process is stored in errnb.
+// Returns 0 on success and -1 if an allocation error occurs in any subfunction.
+int	setup_process_cmds(t_process	**processes, t_args args)
 {
 	int	i;
 
 	while (i < args.ncmd)
 	{
-		processes[i]->errnb = get_cmd(processes[i], args.argv[i + 2],
-				args.path);
-		if (processes[i]->errnb == -1)
-			return (-1);
+		if (!processes[i]->errnb)
+		{
+			processes[i]->errnb = initialize_process_cmd(processes[i],
+					args.argv[i + 2], args.path);
+			if (processes[i]->errnb == -1)
+				return (-1);
+		}
 	}
 	return (0);
 }

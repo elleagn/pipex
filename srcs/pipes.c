@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:01:05 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 10:39:57 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 11:20:15 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ int	**create_pipes(int size)
 	{
 		pipes[i] = malloc(2 * sizeof(int));
 		if (!pipes[i])
-			return (free_int_tab(pipes), NULL);
+			return (free_int_array(pipes), NULL);
 		i++;
 	}
 	i = 0;
 	while (i < size)
 	{
 		if (pipe(pipes[i]) < 0)
-			return (close_pipes(pipes), free_int_tab(pipes), NULL);
+			return (close_pipes(pipes), free_int_array(pipes), NULL);
 		i++;
 	}
 	return (pipes);

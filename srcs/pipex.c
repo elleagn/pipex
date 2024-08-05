@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:19:37 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 11:10:23 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 15:26:16 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	pipex(t_args *args, t_process **processes)
 
 	if (setup_process_pipes(processes, args))
 		return (-1);
-	if (fill_cmds(processes, args))
+	if (setup_process_cmds(processes, args))
 		return (close_process_files(processes), -1);
 	i = 0;
 	while (i < args->ncmd)

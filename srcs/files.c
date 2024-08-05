@@ -6,14 +6,13 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 19:01:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 11:10:23 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 15:58:17 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
 // Closes the input and output file descriptors for each process in the array.
-
 void	close_process_files(t_process **processes)
 {
 	int	i;
@@ -32,7 +31,6 @@ void	close_process_files(t_process **processes)
 // Opens the specified file in read-only mode and stores the file descriptor in
 // fd[0].
 // Returns 1 on failure and 0 on success.
-
 int	open_input_file(int *fd, char *file)
 {
 	fd[0] = open(file, O_RDONLY);
@@ -44,7 +42,6 @@ int	open_input_file(int *fd, char *file)
 // Opens the specified file in write-only mode, creating it if it does not
 // exist, and stores the file descriptor in fd[1].
 // Returns 1 on failure and 0 on success.
-
 int	open_output_file(int *fd, char *file)
 {
 	fd[1] = open(file, O_WRONLY | O_CREAT, 0644);
@@ -60,7 +57,6 @@ int	open_output_file(int *fd, char *file)
 // args.ncmd represents the number of commands to be executed in the pipeline.
 // args.argv is the array of command-line arguments.
 // Returns 0 on success and -1 on failure.
-
 int	setup_process_pipes(t_process **processes, t_args args)
 {
 	int	**pipes;
@@ -79,8 +75,9 @@ int	setup_process_pipes(t_process **processes, t_args args)
 		i++;
 	}
 	processes[0]->errnb = open_input_file(processes[0]->fd, args.argv[1]);
-	processes[i - 1]->errnb = open_output_file(processes[i - 1]->fd, args.argv[i + 1]);
-	free_2intarr(pipes);
+	processes[i - 1]->errnb = open_output_file(processes[i - 1]->fd,
+			args.argv[i + 1]);
+	free_int_array(pipes);
 	return (0);
 }
 

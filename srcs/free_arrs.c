@@ -6,15 +6,14 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:02:27 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 10:40:33 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 15:58:48 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-// Free a null-terminated array of strings
-
-void	free_strarr(char **array)
+// Frees a null-terminated array of strings.
+void	free_str_array(char **array)
 {
 	int	i;
 
@@ -24,21 +23,22 @@ void	free_strarr(char **array)
 	while (array[i])
 	{
 		free(array[i]);
+		i++;
 	}
 	free(array);
 }
 
-// Frees a null terminated tab of 2-sized tabs of ints
-
-void	free_int_tab(int **tab)
+// Frees a null-terminated array of pointers to 2-element integer arrays,
+// including the integer arrays and the array of pointers itself.
+void	free_int_array(int **array)
 {
 	int	i;
 
 	i = 0;
-	while (tab[i])
+	while (array[i])
 	{
-		free(tab[i]);
+		free(array[i]);
 		i++;
 	}
-	free(tab);
+	free(array);
 }

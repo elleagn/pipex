@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 08:21:34 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 11:10:23 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 11:20:57 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			**create_pipes(int size);
 
 // cleanup functions
 
-void		free_strarr(char **array);
+void		free_str_array(char **array);
 void		clear_proc_array(t_process **proc_array);
 void		clear_process(t_process *process);
 void		free_int_tab(int **tab);
