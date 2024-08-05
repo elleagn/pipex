@@ -6,26 +6,11 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:01:05 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/31 19:45:19 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 10:39:57 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
-
-// Frees a null terminated tab of 2-sized tabs of ints
-
-void	free_int_tab(int **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
 
 // Close the pipes described in a NULL terminated array of fd[2]
 

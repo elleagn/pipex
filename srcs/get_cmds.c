@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_args.c                                         :+:      :+:    :+:   */
+/*   get_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gaelle <Gaelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/28 17:10:41 by Gaelle           ###   ########.fr       */
+/*   Updated: 2024/08/05 10:08:09 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
-
-void	free_char_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
 
 void	replace(char **str1, char *str2)
 {
@@ -76,16 +63,29 @@ int	find_bin(char **cmd, char **path)
 	return (127);
 }
 
-int	get_args(t_process *process, char *cmd, char **path)
+int	get_cmd(t_process *process, char *cmd, char **path)
 {
-	process->args = ft_split(cmd, ' ');
-	if (!process->args)
+	process->cmd = ft_split(cmd, ' ');
+	if (!process->cmd)
 		return (perror("split"), -1);
-	if (!process->args[0])
+	if (!process->cmd[0])
 		return (ft_printf("%s: command not found", cmd), 127);
-	return (find_bin(&(process->args[0]), path));
+	return (find_bin(&(process->cmd[0]), path));
 }
 
+int	fill_cmds(t_process	**processes, t_args args)
+{
+	int	i;
+
+	while (i < args.ncmd)
+	{
+		processes[i]->errnb = get_cmd(processes[i], args.argv[i + 2],
+				args.path);
+		if (processes[i]->errnb == -1)
+			return (-1);
+	}
+	return (0);
+}
 // find_bin
 
 // int	main(int ac, char **av)

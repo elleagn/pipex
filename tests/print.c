@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:45:03 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/31 17:59:45 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/05 11:05:50 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	print_process(t_process *process)
 	ft_printf("cmd: ");
 	ft_printcharr(process->cmd, " ");
 	ft_printf("errnb: %i\n", process->errnb);
-	ft_printf("pos: %i\n", process->pos);
 	ft_printf("pid: %i\n", process->pid);
 }
 
@@ -41,7 +40,7 @@ int	main(void)
 	t_process	**procarr;
 	int			i;
 
-	procarr = init_proc_array(5);
+	procarr = init_proc_array(2);
 	if (!procarr)
 		return (ft_printf("null array\n"), 1);
 	i = 0;

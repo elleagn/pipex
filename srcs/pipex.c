@@ -5,61 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 09:31:26 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/19 11:17:30 by gozon            ###   ########.fr       */
+/*   Created: 2024/07/31 18:19:37 by gozon             #+#    #+#             */
+/*   Updated: 2024/08/05 11:10:23 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-char	*get_path_str(char **envp)
+int	pipex(t_args *args, t_process **processes)
 {
-	int		i;
-	char	*path;
+	int	i;
 
+	if (setup_process_pipes(processes, args))
+		return (-1);
+	if (fill_cmds(processes, args))
+		return (close_process_files(processes), -1);
 	i = 0;
-	path = NULL;
-	while (envp[i])
+	while (i < args->ncmd)
 	{
-		if (ft_strnstr(envp[i], "PATH", 4))
+		processes[i]->pid = fork();
+		if (processes[i]->pid < -1)
 		{
-			path = ft_strdup(&envp[i][5]);
-			if (!path)
-				return (perror("malloc"), NULL);
-			return (path);
+			perror("fork");
+			processes[i]->errnb = -1;
+			break ;
 		}
-		i++;
+		if (!processes[i]->pid)
+			child_process(processes[i]);
 	}
-	return (NULL);
-}
-
-char	**get_path(char **envp)
-{
-	char	**path_tab;
-	char	*path;
-
-	path = get_path_str(envp);
-	if (!path)
-		return (NULL);
-	path_tab = ft_split(path, ':');
-	free(path);
-	if (!path_tab)
-		return (perror("ft_split"), NULL);
-	return (path_tab);
-}
-
-int	pipex(t_list *proclist, char **av, char **envp)
-{
-	char	**path;
-	int		**pipes;
-
-	path = get_path(envp);
-	if (!path)
-		return (NULL);
-	pipes = create_pipes(1);
-	if (!pipes)
-		return (free(path), NULL);
-	proclist = setup_proclist(av, path, proclist, pipes);
-	if (!proclist)
-		return (free(path), close_pipes(pipes), NULL);
+	i = 0;
+	close_process_files(processes);
+	while (wait(NULL) > 0)
+		continue ;
+	return (processes[i]->errnb);
 }

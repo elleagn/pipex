@@ -5,42 +5,68 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 08:32:23 by gozon             #+#    #+#             */
-/*   Updated: 2024/07/31 10:56:55 by gozon            ###   ########.fr       */
+/*   Created: 2024/07/31 10:38:21 by gozon             #+#    #+#             */
+/*   Updated: 2024/07/31 18:17:54 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-// t_process	*init_process(void)
-// {
-// 	t_process	*process;
-
-// 	process = malloc(sizeof(t_process));
-// 	if (!process)
-// 		return (perror("init_process"), NULL);
-// 	process->in = -1;
-// 	process->out = -1;
-// 	process->args = NULL;
-// 	process->error_nb = 0;
-// 	process->pid = -1;
-// 	return (process);
-// }
-
-void	destroy_process(t_process *process)
+void	clear_process(t_process *process)
 {
-	free(process->args);
-	free(process);
+	if (process)
+	{
+		free(process->cmd);
+		free(process);
+	}
 }
 
-// t_process	*setup_process(char *cmd, char **path, int in, int out)
-// {
-// 	t_process	*process;
+t_process	*init_process(void)
+{
+	t_process	*process;
 
-// 	process = init_process();
-// 	if (!process)
-// 		return (NULL);
-// 	process->args = get_args(process, cmd, path);
-// 	if (!process->args)
-// 		return (NULL);
-// }
+	process = malloc(sizeof(t_process));
+	if (!process)
+		return (perror("init_process"), NULL);
+	process->fd[0] = -1;
+	process->fd[1] = -1;
+	process->cmd = NULL;
+	process->errnb = 0;
+	process->pos = -1;
+	process->pid = -1;
+	return (process);
+}
+
+void	clear_proc_array(t_process **proc_array)
+{
+	int	i;
+
+	i = 0;
+	while (proc_array[i])
+	{
+		clear_process(proc_array[i]);
+		i++;
+	}
+}
+
+t_process	**init_proc_array(int size)
+{
+	t_process	**proc_array;
+	int			i;
+
+	proc_array = ft_calloc((unsigned)size + 1, sizeof(t_process *));
+	if (!proc_array)
+		return (perror("init_proc_array"), NULL);
+	i = 0;
+	while (i < size)
+	{
+		proc_array[i] = init_process();
+		if (!proc_array[i])
+		{
+			clear_proc_array(proc_array);
+			return (NULL);
+		}
+		i++;
+	}
+	return (proc_array);
+}
