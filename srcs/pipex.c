@@ -6,12 +6,13 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:19:37 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 21:49:54 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/06 12:34:24 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
+// Returns the smaller of two integers.
 int	min(int n1, int n2)
 {
 	if (n1 < n2)
@@ -19,6 +20,16 @@ int	min(int n1, int n2)
 	return (n2);
 }
 
+// Sets up pipes, files, and commands for each process based on command-line
+// arguments.
+// Forks child processes to execute commands concurrently and waits for their
+// completion.
+// Closes open file descriptors but does not free the process array.
+// Returns:
+//   -1 on syscall failure or allocation error
+//   127 if any command is not found
+//   1 for other general errors such as file access issues
+//   0 on success
 int	pipex(t_args args, t_process **processes)
 {
 	int		i;

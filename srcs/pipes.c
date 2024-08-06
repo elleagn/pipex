@@ -6,14 +6,14 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:01:05 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 11:20:15 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/06 12:23:02 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-// Close the pipes described in a NULL terminated array of fd[2]
-
+// Closes the file descriptors in a NULL-terminated array of integer pairs.
+// Each pair represents a pipe, with two elements: [read_fd, write_fd].
 void	close_pipes(int **pipes)
 {
 	int	i;
@@ -27,8 +27,11 @@ void	close_pipes(int **pipes)
 	}
 }
 
-// Create size pipes and puts the fds in a null-terminated array
-
+// Creates an array of pipes, each represented by a pair of file descriptors.
+// Allocates a NULL-terminated array of integer pairs, where each pair is a
+// pipe.
+// Returns the array on success, or NULL if a syscall or allocation error
+// occurs.
 int	**create_pipes(int size)
 {
 	int	**pipes;
@@ -36,20 +39,21 @@ int	**create_pipes(int size)
 
 	pipes = ft_calloc(size + 1, sizeof(int *));
 	if (!pipes)
-		return (NULL);
+		return (perror("malloc"), NULL);
 	i = 0;
 	while (i < size)
 	{
 		pipes[i] = malloc(2 * sizeof(int));
 		if (!pipes[i])
-			return (free_int_array(pipes), NULL);
+			return (perror("malloc"), free_int_array(pipes), NULL);
 		i++;
 	}
 	i = 0;
 	while (i < size)
 	{
 		if (pipe(pipes[i]) < 0)
-			return (close_pipes(pipes), free_int_array(pipes), NULL);
+			return (perror("pipe"), close_pipes(pipes), free_int_array(pipes),
+				NULL);
 		i++;
 	}
 	return (pipes);
