@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 21:17:31 by gozon             #+#    #+#             */
-/*   Updated: 2024/09/04 08:55:48 by gozon            ###   ########.fr       */
+/*   Updated: 2024/08/06 12:13:22 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	main(int argc, char **argv, char **envp)
 	t_process	**processes;
 	int			retval;
 
-	if (argc != 5)
+	if (argc < 5)
 		return (ft_printf("not enough arguments"), 1);
 	args = create_args(argc, argv, envp);
 	if (!args)
