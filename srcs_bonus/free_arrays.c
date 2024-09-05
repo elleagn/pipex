@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   free_arrays.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:02:27 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/05 16:09:10 by gozon            ###   ########.fr       */
+/*   Updated: 2024/09/05 10:20:59 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../pipex_bonus.h"
 
 // Frees a null-terminated array of strings.
 void	free_str_array(char **array)
@@ -42,4 +42,3 @@ void	free_int_array(int **array)
 	}
 	free(array);
 }
-

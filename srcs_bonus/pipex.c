@@ -6,11 +6,11 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:19:37 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/06 12:34:24 by gozon            ###   ########.fr       */
+/*   Updated: 2024/09/04 09:22:56 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../pipex_bonus.h"
 
 // Returns the smaller of two integers.
 int	min(int n1, int n2)

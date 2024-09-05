@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 19:01:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/09/04 08:52:16 by gozon            ###   ########.fr       */
+/*   Updated: 2024/09/05 10:26:28 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ int	open_input_file(int *fd, char *file)
 // Returns 1 on failure and 0 on success.
 int	open_output_file(int *fd, char *file)
 {
-	if (unlink(file) == -1)
-		return (perror(file), 1);
-	fd[1] = open(file, O_WRONLY | O_CREAT, 0644);
+	fd[1] = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd[1] < 0)
 		return (perror(file), 1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 21:17:31 by gozon             #+#    #+#             */
-/*   Updated: 2024/09/04 08:55:48 by gozon            ###   ########.fr       */
+/*   Updated: 2024/09/05 10:25:04 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	main(int argc, char **argv, char **envp)
 	int			retval;
 
 	if (argc != 5)
-		return (ft_printf("not enough arguments"), 1);
+		return (ft_printf("wrong number of arguments"), 1);
 	args = create_args(argc, argv, envp);
 	if (!args)
 		return (-1);

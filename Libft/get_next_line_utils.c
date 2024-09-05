@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 08:19:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/06/07 13:14:50 by gozon            ###   ########.fr       */
+/*   Updated: 2024/09/05 09:24:01 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,7 @@ int	ft_get_last_byte(char *buf, int read_size)
 	return (i);
 }
 
-int	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strjoin(char **line, char *buf, int *eol, int read_size)
+char	*ft_strjoin_line(char **line, char *buf, int *eol, int read_size)
 {
 	int		len;
 	int		last_byte;

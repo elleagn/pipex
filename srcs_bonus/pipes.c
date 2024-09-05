@@ -6,11 +6,11 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:01:05 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/06 12:23:02 by gozon            ###   ########.fr       */
+/*   Updated: 2024/09/04 09:22:54 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../pipex_bonus.h"
 
 // Closes the file descriptors in a NULL-terminated array of integer pairs.
 // Each pair represents a pipe, with two elements: [read_fd, write_fd].

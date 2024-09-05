@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:18:55 by gozon             #+#    #+#             */
-/*   Updated: 2024/09/04 08:27:08 by gozon            ###   ########.fr       */
+/*   Updated: 2024/09/05 10:20:44 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	child_process(t_process **processes, int i, char **envp)
 		perror("dup2");
 		exit(-1);
 	}
-//	ft_printf("%i", processes[i]->fd[1]);
 	close(processes[i]->fd[1]);
 	execve(processes[i]->cmd[0], processes[i]->cmd, envp);
 	perror("execve");

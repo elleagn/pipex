@@ -6,11 +6,11 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 21:17:31 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/06 12:13:22 by gozon            ###   ########.fr       */
+/*   Updated: 2024/09/04 09:56:24 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../pipex_bonus.h"
 
 // Extracts the PATH environment variable value from envp as a string.
 // Returns NULL if the PATH variable doesn't exist or if a memory allocation
@@ -36,7 +36,7 @@ char	*get_path_str(char **envp)
 		}
 		i++;
 	}
-	return (NULL);
+	return (ft_printf("PATH variable not found\n"), NULL);
 }
 
 // Extracts the PATH environment variable value from envp and splits it into an
@@ -85,8 +85,12 @@ t_args	*create_args(int argc, char **argv, char **envp)
 	args = malloc(sizeof(t_args));
 	if (!args)
 		return (NULL);
-	args->ncmd = argc - 3;
-	args->argv = argv;
+	if (!strncmp(argv[1], "here_doc", 1))
+		args->here_doc = 1;
+	else
+		args->here_doc = 0;
+	args->ncmd = argc - 3 - args->here_doc;
+	args->argv = &argv[args->here_doc];
 	args->envp = envp;
 	args->path = get_path(envp);
 	if (!args->path)

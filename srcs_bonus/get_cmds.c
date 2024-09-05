@@ -6,11 +6,11 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/09/04 08:30:16 by gozon            ###   ########.fr       */
+/*   Updated: 2024/09/04 09:22:41 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../pipex_bonus.h"
 
 // Frees the string pointed to by str1, and replaces it with str2.
 // str2 replaces the new string and is not freed.
