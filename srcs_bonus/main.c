@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 21:17:31 by gozon             #+#    #+#             */
-/*   Updated: 2024/09/04 09:56:24 by gozon            ###   ########.fr       */
+/*   Updated: 2024/09/06 10:36:58 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	main(int argc, char **argv, char **envp)
 	processes = init_proc_array(args->ncmd);
 	if (!processes)
 		return (clear_args(args), -1);
-	retval = pipex(*args, processes);
+	retval = pipex(args, processes);
 	clear_proc_array(processes);
 	clear_args(args);
 	return (retval);

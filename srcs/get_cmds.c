@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/09/04 08:30:16 by gozon            ###   ########.fr       */
+/*   Updated: 2024/09/06 10:38:01 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	find_bin(char **cmd, char **path)
 	{
 		if (access(*cmd, X_OK))
 			return (perror(*cmd), 127);
+		if (is_directory(*cmd))
+			return (ft_printf("%s: is a directory\n"), 126);
 		return (0);
 	}
 	i = 0;
@@ -64,7 +66,7 @@ int	find_bin(char **cmd, char **path)
 		bin = strjoin_three(path[i], "/", *cmd);
 		if (!bin)
 			return (perror("malloc"), -1);
-		if (!access(bin, X_OK))
+		if (!access(bin, X_OK) && !is_directory(*cmd))
 			return (replace(cmd, bin), 0);
 		free(bin);
 		i++;

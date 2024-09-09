@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:19:37 by gozon             #+#    #+#             */
-/*   Updated: 2024/08/06 12:34:24 by gozon            ###   ########.fr       */
+/*   Updated: 2024/09/06 09:41:27 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,17 @@ int	min(int n1, int n2)
 //   127 if any command is not found
 //   1 for other general errors such as file access issues
 //   0 on success
-int	pipex(t_args args, t_process **processes)
+int	pipex(t_args *args, t_process **processes)
 {
 	int		i;
 	pid_t	pid;
 
-	if (setup_process_pipes(processes, args))
+	if (setup_process_pipes(processes, *args))
 		return (-1);
-	if (setup_process_cmds(processes, args))
+	if (setup_process_cmds(processes, *args))
 		return (close_process_files(processes), -1);
 	i = 0;
-	while (i < args.ncmd)
+	while (i < args->ncmd)
 	{
 		pid = fork();
 		if (pid < -1)
@@ -50,11 +50,11 @@ int	pipex(t_args args, t_process **processes)
 			break ;
 		}
 		if (!pid && !processes[i]->errnb)
-			child_process(processes, i, args.envp);
+			child_process(processes, i, args);
 		i++;
 	}
 	close_process_files(processes);
 	while (wait(NULL) > 0)
 		continue ;
-	return (processes[min(args.ncmd - 1, i)]->errnb);
+	return (processes[min(args->ncmd - 1, i)]->errnb);
 }

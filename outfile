@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    outfile                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: gozon <gozon@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 08:35:14 by gozon             #+#    #+#              #
-#    Updated: 2024/09/06 10:36:24 by gozon            ###   ########.fr        #
+#    Updated: 2024/09/06 10:40:29 by gozon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,7 @@ $(OBJ_BONUS_DIR):
 $(OBJ_BONUS_DIR)/%.o: $(BONUS_DIR)/%.c | $(OBJ_BONUS_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(OBJ_BONUS)
+bonus: $(OBJ_BONUS) $(SRC_BONUS)
 	@echo "Compilation de $(NAME) (bonus) en cours..."
 	@$(ECHO)make -C Libft --silent --no-print-directory \
 	&& { echo "Compilation de la Libft ($(COMP_SUCCESS))" ; } \

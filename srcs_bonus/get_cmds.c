@@ -6,7 +6,7 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:43:17 by gozon             #+#    #+#             */
-/*   Updated: 2024/09/04 09:22:41 by gozon            ###   ########.fr       */
+/*   Updated: 2024/09/06 10:39:00 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	find_bin(char **cmd, char **path)
 	{
 		if (access(*cmd, X_OK))
 			return (perror(*cmd), 127);
+		if (is_directory(*cmd))
+			return (ft_printf("%s: is a directory\n"), 126);
 		return (0);
 	}
 	i = 0;

@@ -6,11 +6,22 @@
 /*   By: gozon <gozon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 19:01:33 by gozon             #+#    #+#             */
-/*   Updated: 2024/09/05 10:26:28 by gozon            ###   ########.fr       */
+/*   Updated: 2024/09/06 09:55:18 by gozon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+int	is_directory(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_DIRECTORY);
+	if (fd < 0)
+		return (0);
+	close(fd);
+	return (1);
+}
 
 // Closes the input and output file descriptors for each process in the array.
 void	close_process_files(t_process **processes)
